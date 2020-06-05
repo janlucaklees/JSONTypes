@@ -7,8 +7,6 @@ error_reporting(E_ALL);
 include 'JSONTypes.php';
 
 
-const MAIL_REGEX = '/^\S+@\S+\.\S{2,3}$/';
-
 $skeema = JSONTypes::string();
 var_dump( $skeema->isValid('Jan-Luca Klees') );
 var_dump( $skeema->isValid('') );
@@ -21,7 +19,7 @@ var_dump( $skeema->isValid([]) );
 print_r("\n");
 
 
-$skeema = JSONTypes::string()->matches(MAIL_REGEX);
+$skeema = JSONTypes::string()->isEmailAddress();
 var_dump( $skeema->isValid('email@janlucaklees.de') );
 
 var_dump( $skeema->isValid('') );
