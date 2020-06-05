@@ -21,9 +21,12 @@ abstract class AbstractValidator
      */
     private array $validationStack;
 
+    protected bool $required;
+
     public function __construct()
     {
         $this->validationStack = [];
+        $this->required        = false;
     }
 
     protected function addValidator(Closure $validator)
@@ -33,10 +36,10 @@ abstract class AbstractValidator
         return $this;
     }
 
-    public function isValid($value)
+    public function isValid($object)
     {
         foreach ($this->validationStack as $validator) {
-            if(!$validator($value)) {
+            if(!$validator($object)) {
                 return false;
             }
         }
@@ -45,8 +48,9 @@ abstract class AbstractValidator
 
     public function isRequired()
     {
-        return $this->addValidator(fn($value) => !empty($value));
+        $this->required = true;
 
+        return $this;
     }
 }
 
@@ -75,5 +79,60 @@ class StringValidator extends AbstractValidator
     public function notEmpty()
     {
         return $this->addValidator(fn($value) => $value !== '');
+    }
+
+    public function isRequired()
+    {
+        parent::isRequired();
+
+        return $this->notEmpty();
+    }
+}
+
+class ObjectValidator extends AbstractValidator
+{
+    private $schema;
+
+    public function __construct($schema)
+    {
+        parent::__construct();
+
+        $this->schema = $schema;
+    }
+
+    /**
+     * @param $object
+     * @return bool
+     * @throws Exception
+     */
+    public function isValid($object)
+    {
+        if(!is_object($object)) {
+            return false;
+        }
+
+        /**
+         * @var object $object
+         */
+        foreach ($this->schema as $key => $validator) {
+            if(!($validator instanceof AbstractValidator)) {
+                throw new Exception('Give me a real validator!');
+            }
+
+            /**
+             * @var AbstractValidator $validator
+             */
+            if(property_exists($object, $key)) {
+                if(!$validator->isValid($object->{$key})) {
+                    return false;
+                }
+            } else {
+                if($validator->required) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
