@@ -4,7 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include '../src/JSONTypes.php';
+require_once __DIR__ . '/../vendor/autoload.php'; // Autoload files using Composer autoload
+
+use JanLucaKlees\JSONTypes;
 
 
 $skeema = JSONTypes::string();

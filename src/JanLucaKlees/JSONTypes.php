@@ -1,5 +1,9 @@
 <?php
 
+namespace JanLucaKlees;
+
+use Closure;
+
 
 class JSONTypes
 {
