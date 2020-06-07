@@ -2,6 +2,8 @@
     "name": "janluca/json-types",
     "description": "A library to validate JSON or php objects in general that works similar to React PropTypes.",
     "type": "library",
+    "version": "0.3.0-dev",
+    "homepage": "https://github.com/janlucaklees/JSONTypes",
     "authors": [
         {
             "name": "Jan-Luca Klees",
