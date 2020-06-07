@@ -7,7 +7,7 @@ class ObjectValidator extends AbstractValidator
 {
     private $schema;
 
-    public function __construct($schema)
+    public function __construct($schema = [])
     {
         parent::__construct();
 

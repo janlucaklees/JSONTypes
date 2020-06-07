@@ -8,7 +8,7 @@ use JanLucaKlees\JSONTypes\Validators\StringValidator;
 
 class JSONTypes
 {
-    public static function object($object)
+    public static function object($object = [])
     {
         return new ObjectValidator($object);
     }
