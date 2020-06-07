@@ -23,3 +23,7 @@ But, testing and automatic building and publishing are also something I'd like o
 - Extensive testing to prevent errors
 - Automatic building and publishing
 - Future: Generation of JSON Schema used for sharing validation between services
+
+## Running the test
+
+For the tests there is a composer script. Just run them with `composer run tests`.
