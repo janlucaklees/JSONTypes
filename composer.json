@@ -1,0 +1,19 @@
+{
+    "name": "janluca/json-types",
+    "description": "A library to validate JSON or php objects in general that works similar to React PropTypes.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jan-Luca Klees",
+            "email": "email@janlucaklees.de"
+        }
+    ],
+    "require": {
+        "php": ">= 7.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "JanLucaKlees": "src/"
+        }
+    }
+}
